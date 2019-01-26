@@ -1,0 +1,13 @@
+language: python
+python:
+  - "3.6"
+before_install:
+  - "pip install pyyaml"
+  - "pip install sphinxcontrib-napoleon"
+  - "python travis-config.py"
+install:
+  - "bash travis-output.sh"
+  - "pip install flake8"
+script:
+  - "flake8 --ignore=C901"
+  - "pytest"

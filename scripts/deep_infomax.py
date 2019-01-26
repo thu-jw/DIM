@@ -38,18 +38,18 @@ class DIM(ModelPlugin):
     def __init__(self, Classifier=SimpleClassifier):
         super().__init__()
 
-        self.classifier_c = Classifier(
+        self.classifier_c = Classifier(dict(
             nets=dict(classifier='classifier_c'),
-            kwargs=dict(classifier_args='classifier_c_args'))
-        self.classifier_m = Classifier(
+            kwargs=dict(classifier_args='classifier_c_args')))
+        self.classifier_m = Classifier(dict(
             nets=dict(classifier='classifier_m'),
-            kwargs=dict(classifier_args='classifier_m_args'))
-        self.classifier_f = Classifier(
+            kwargs=dict(classifier_args='classifier_m_args')))
+        self.classifier_f = Classifier(dict(
             nets=dict(classifier='classifier_f'),
-            kwargs=dict(classifier_args='classifier_f_args'))
-        self.classifier_g = Classifier(
+            kwargs=dict(classifier_args='classifier_f_args')))
+        self.classifier_g = Classifier(dict(
             nets=dict(classifier='classifier_g'),
-            kwargs=dict(classifier_args='classifier_g_args'))
+            kwargs=dict(classifier_args='classifier_g_args')))
 
     def build(self, global_units=64, mi_units=1024, encoder_config='basic32x32',
               encoder_args={}):
@@ -67,7 +67,7 @@ class DIM(ModelPlugin):
         self.data.reset(mode='test', make_pbar=False)
         self.data.next()
 
-        dim_c, dim_x, dim_y = self.get_dims('images')
+        dim_c, dim_x, dim_y = self.get_dims('c', 'x', 'y')
         input_shape = (dim_x, dim_y, dim_c)
 
         # Create encoder.
